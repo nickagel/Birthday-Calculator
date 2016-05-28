@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <style>
+       *{
+           font-family: arial;
+       }
+       section{
+            width: 400px;
+            margin: 0 auto;
+            padding: 50px;
+       }
+       
+   </style>
+</head>
+<body>
+
+<section ng-app="get" data-ng-app="" data-ng-init="numberOfPeople=1;days=365;percentage=100;round=3">
+    
+<h1>Birthday Calculator</h1>
+<label>Number of People: <input min=0 type="number" ng-model="numberOfPeople"></label><br>
+<label>Leap Year: <input type="checkbox" ng-model="days" ng-true-value="366" ng-false-value="365"></label>
+
+<p>
+    Two people that have the same birthday<br>
+    
+{{possiblePairs = numberOfPeople * (numberOfPeople - 1)/2; ""}}
+{{uniquePairChance = (days - 1) / days; "" }}
+Chance: {{uniquePairChance|getPercentage: possiblePairs | number: 3}}%
+
+</p>
+
+</section>
+
+<script>
+angular.module('get', [])
+.filter('getPercentage', function(){
+    return function(base, exponent){
+        return (1 - Math.pow(base, exponent)) * 100;
+    }
+})
+</script>
+
+
+</body>
+</html>
